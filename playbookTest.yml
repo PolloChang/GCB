@@ -1,4 +1,4 @@
 ---
 - hosts: centos6
   roles:
-      - { role: adminUser }
+      - { role: pushFile }

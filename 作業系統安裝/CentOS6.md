@@ -15,3 +15,9 @@
 * TWGCB-01-008-0236
 * TWGCB-01-008-0235
 * TWGCB-01-008-0239
+
+## 必裝套件
+
+* libselinux-python
+
+ansible 上傳附件會使用到

@@ -1,0 +1,7 @@
+- name: test push files
+  copy:
+    src: files/test.md
+    dest: /root
+    owner: root
+    group: root
+    mode: 0644

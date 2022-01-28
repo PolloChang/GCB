@@ -1,0 +1,12 @@
+---
+- name: restart sshd {{ansible_distribution}}{{ansible_distribution_major_version}}
+  ansible.builtin.systemd:
+    state: restart
+    name: sshd
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: restart sshd {{ansible_distribution}}{{ansible_distribution_major_version}}
+  ansible.builtin.service:
+    state: restarted
+    name: sshd
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"

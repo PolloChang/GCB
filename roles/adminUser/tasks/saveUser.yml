@@ -1,0 +1,20 @@
+---
+
+- name: Ensure group "jameschang" exists
+  ansible.builtin.group:
+    name: jameschang
+    state: present
+    gid: 1001
+
+
+- name: Add the user 'jameschang' with a specific uid and a primary group of 'admin'
+  ansible.builtin.user:
+    name: jameschang
+    comment: systemAdmin
+    uid: 1001
+    group: "{{item}}"
+    update_password: always
+    password: "{{ newpassword|password_hash('sha512') }}"
+  with_items:
+    - wheel
+    - jameschang

@@ -1,0 +1,4 @@
+---
+- hosts: centos6
+  roles:
+      - { role: changpwd, become: yes }

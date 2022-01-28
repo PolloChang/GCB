@@ -1,0 +1,216 @@
+#       $OpenBSD: sshd_config,v 1.80 2008/07/02 02:24:18 djm Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/local/bin:/bin:/usr/bin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options change a
+# default value.
+
+#Port 22
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+# Disable legacy (protocol version 1) support in the server for new
+# installations. In future the default will change to require explicit
+# activation of protocol 1
+# TWGCB-01-008-0263: Protocol 2
+Protocol 2
+
+# HostKey for protocol version 1
+#HostKey /etc/ssh/ssh_host_key
+# HostKeys for protocol version 2
+#HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_dsa_key
+
+# Lifetime and size of ephemeral version 1 server key
+#KeyRegenerationInterval 1h
+#ServerKeyBits 1024
+
+# Logging
+# obsoletes QuietMode and FascistLogging
+#SyslogFacility AUTH
+SyslogFacility AUTHPRIV
+
+#TWGCB-01-008-0272
+#▪  這項原則設定決定SSH日誌記錄等級，在/etc/ssh/sshd_config檔案中，使用LogLevel參數可設定SSH日誌的記錄等級，選項依照紀錄詳細程度由上至下排序如下，QUIET等級為基本紀錄，DEBUG3等級將包含最詳細紀錄：
+#(1) QUIET
+#(2) FATAL
+#(3) ERROR
+#(4) INFO
+#(5) VERBOSE
+#(6) DEBUG
+#(7) DEBUG1
+#(8) DEBUG2
+#(9) DEBUG3
+#▪  INFO等級為記錄SSH使用者登入活動的基本級別，可用於確定特定使用者何時在系統上處於活動狀態
+#▪  VERBOSE等級為記錄登入與登出活動，以及用於登入的任何SSH金鑰指紋，可使用於管理SSH金鑰
+LogLevel INFO
+
+# Authentication:
+
+#LoginGraceTime 2m
+
+#TWGCB-01-008-0277
+#▪  這項原則設定決定SSH是否設定PermitRootLogin參數，用以決定root帳號是否可使用SSH進行登入
+#▪  禁止root帳號使用SSH進行登入，改請系統管理者使用其個人帳號進行登入，再透過sudo或su指令提升權限為root，以降低系統風險
+# 設定完 sshd 後再開啟
+PermitRootLogin yes
+
+#StrictModes yes
+
+#TWGCB-01-008-0274
+#▪  這項原則設定決定SSH是否設定MaxAuthTries參數
+#▪  MaxAuthTries參數用以指定每個連接允許的驗證登入失敗次數，當登入失敗次數達到一半時，錯誤訊息將會寫入日誌檔案，詳細說明登入失敗過程
+#▪  建議將MaxAuthTries參數設定為較小的值，以降低針對SSH伺服器成功進行暴力攻擊之風險
+MaxAuthTries 4
+
+#MaxSessions 10
+
+#RSAAuthentication yes
+#PubkeyAuthentication yes
+#AuthorizedKeysFile     .ssh/authorized_keys
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandRunAs nobody
+
+# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
+#RhostsRSAAuthentication no
+# similar for protocol version 2
+
+#TWGCB-01-008-0276
+#▪  這項原則設定決定SSH是否設定HostbasedAuthentication參數，以指定是否使用基於主機的身分驗證方式
+#▪  此參數僅適用於SSH-2協定
+#▪  基於主機的身分驗證方式較不安全，建議停用
+HostbasedAuthentication no
+# Change to yes if you don't trust ~/.ssh/known_hosts for
+# RhostsRSAAuthentication and HostbasedAuthentication
+#IgnoreUserKnownHosts no
+# Don't read the user's ~/.rhosts and ~/.shosts files
+# TWGCB-01-008-0275
+#▪  這項原則設定決定SSH是否設定IgnoreRhosts參數
+#▪  IgnoreRhosts參數指定在RhostsRSAAuthentication或HostbasedAuthentication驗證過程中，將不使用.rhosts與.shosts檔案
+#▪  設定IgnoreRhosts參數為yes，強制使用者在使用SSH進行身分驗證時須輸入密碼
+IgnoreRhosts yes
+
+# To disable tunneled clear text passwords, change to no here!
+#PasswordAuthentication yes
+
+#TWGCB-01-008-0278
+#▪  這項原則設定決定SSH是否設定PermitEmptyPasswords參數，用以指定SSH伺服器是否允許使用空密碼帳號登入系統
+#▪  禁止空密碼帳號使用SSH進行遠端存取，以降低未經授權存取系統之風險
+PermitEmptyPasswords no
+
+PasswordAuthentication yes
+
+# Change to no to disable s/key passwords
+#ChallengeResponseAuthentication yes
+ChallengeResponseAuthentication no
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#KerberosGetAFSToken no
+#KerberosUseKuserok yes
+
+# GSSAPI options
+#GSSAPIAuthentication no
+GSSAPIAuthentication yes
+#GSSAPICleanupCredentials yes
+GSSAPICleanupCredentials yes
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIKeyExchange no
+
+# Set this to 'yes' to enable PAM authentication, account processing, 
+# and session processing. If this is enabled, PAM authentication will 
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+#UsePAM no
+UsePAM yes
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+#AllowAgentForwarding yes
+#AllowTcpForwarding yes
+#GatewayPorts no
+
+#TWGCB-01-008-0273
+#▪  這項原則設定決定SSH是否啟用X11Forwarding功能
+#▪  X11Forwarding功能用於與X11建立通道，以啟用遠端圖形介面連線
+#▪  設定X11Forwarding參數為no，以停用遠端圖形介面連線功能
+#▪  對於允許使用者登入的X11遠端伺服器而言，可能遭伺服器上其他使用者攻擊
+X11Forwarding no
+
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+#PrintMotd yes
+#PrintLastLog yes
+#TCPKeepAlive yes
+#UseLogin no
+#UsePrivilegeSeparation yes
+
+#TWGCB-01-008-0279
+#▪  這項原則設定決定SSH是否設定PermitUserEnvironment參數
+#▪  PermitUserEnvironment參數決定是否允許使用者可藉由SSH守護程序變更環境設定
+#▪  禁止使用者藉由SSH守護程序變更環境設定，以避免使用者得以繞過系統存取限制
+PermitUserEnvironment no
+#Compression delayed
+
+#TWGCB-01-008-0280
+#▪  這項原則設定決定是否設定SSH逾時時間
+#▪  ClientAliveInterval與ClientAliveCountMax參數可控制SSH連線逾時時間
+#▪  設定ClientAliveInterval參數後，在指定的時間內沒有任何活動將中斷SSH連線
+#▪  設定ClientAliveCountMax參數後，SSH守護程序將在每個ClientAliveInterval指定時間到達時，向用戶端發送訊息，若發送訊息次數到達該參數設定值時，用戶端都沒有回應，則中斷SSH連線
+#▪  舉例若ClientAliveInterval設為15秒，ClientAliveCountMax設為3時，用戶端若連續45秒都沒有回應，則中斷SSH連線
+ClientAliveInterval 600
+ClientAliveCountMax 0
+
+
+#ShowPatchLevel no
+#UseDNS yes
+#PidFile /var/run/sshd.pid
+#MaxStartups 10:30:100
+#PermitTunnel no
+#ChrootDirectory none
+
+# no default banner path
+#Banner none
+
+# override default of no subsystems
+Subsystem       sftp    /usr/libexec/openssh/sftp-server
+
+# Example of overriding settings on a per-user basis
+#Match User anoncvs
+#       X11Forwarding no
+#       AllowTcpForwarding no
+#       ForceCommand cvs server
+
+# TWGCB-01-008-0266
+# ▪  這項原則設定決定是否啟用限制存取SSH功能
+# ▪  /etc/ssh/sshd_config檔案可設定以下參數，以限制可透過SSH存取系統的使用者與群組：
+# (1) AllowUsers：由空格分隔的使用者名稱組成，設定允許登入的使用者
+# (2) AllowGroups：由空格分隔的群組名稱組成，設定允許登入的群組
+# (3) DenyUsers：由空格分隔的使用者名稱組成，設定拒絕登入的使用者
+# (4) DenyGroups：由空格分隔的群組名稱組成，設定拒絕登入的群組
+# ▪  啟用限制存取SSH功能，有助於確保只有授權使用者才能透過SSH遠端存取系統
+
+# TWGCB-01-008-0271
+#▪  編輯/etc/ssh/sshd_config檔案，新增或修改成以下內容：
+#Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+#▪  開啟終端機，執行以下指令，重新啟動SSH服務使其生效：
+#systemctl restart sshd
+#▪  注意：請先通知SSH服務使用者，再重啟SSH服務，以避免影響使用者作業
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr
