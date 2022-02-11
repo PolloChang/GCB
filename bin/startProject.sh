@@ -7,3 +7,5 @@ mkdir -p .ssh
 mkdir -p ./bin/configs
 
 touch ./bin/configs/apList.txt
+
+touch inventory
