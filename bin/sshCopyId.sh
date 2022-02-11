@@ -10,8 +10,6 @@ export apListFile="./configs/apList.txt"
 
 echo "讀取AP清單..."
 
-cat $apListFile
-
 while read line ; do
     apListL[$listN]="$line"
     listN=$[ $listN + 1 ]
@@ -30,7 +28,7 @@ done
 if check=='1'
 then
     echo "$userName"
-    
+
     for apListI in ${apListL[@]}
     do
      echo "正在複製"$apListI
