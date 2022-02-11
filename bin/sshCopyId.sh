@@ -4,6 +4,8 @@
 
 export userName
 
+export sshPort
+
 export check='0'
 
 export apListFile="./configs/apList.txt"
@@ -15,25 +17,20 @@ while read line ; do
     listN=$[ $listN + 1 ]
 done < $apListFile
 
-while getopts u: arg
-do
-    case $arg in
-        u) #user
-            userName="$OPTARG"
-            check='1'
-            ;;
-    esac
-done
+
+echo "Enter the user Name: "  
+read userName  
+
+echo "Enter the your ssh Port: "  
+read sshPort  
 
 if check=='1'
 then
-    echo "$userName"
-
+    
     for apListI in ${apListL[@]}
     do
      echo "正在複製"$apListI
-
-        ssh-copy-id -i ../.ssh/id_rsa $userName@$apListI
+        ssh-copy-id  -p $sshPort -i ../.ssh/id_rsa $userName@$apListI 
      echo "複製完成"$apListI
     done
 fi
