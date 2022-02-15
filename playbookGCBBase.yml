@@ -3,6 +3,7 @@
   tasks:
   - name: OS:"{{ ansible_distribution }}" Version:"{{ansible_distribution_major_version}}" 
     ping:
-- hosts: centos6
+
+- hosts: servers
   roles:
-      - { role: changpwd, become: yes }
+      - { role: GCBBase, become: yes  }
