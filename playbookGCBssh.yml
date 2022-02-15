@@ -1,4 +1,4 @@
 ---
-- hosts: centos6
+- hosts: servers
   roles:
-      - { role: ssh, become: yes  }
+      - { role: GCBSsh, become: yes  }

@@ -6,6 +6,6 @@ mkdir -p .ssh
 
 mkdir -p ./bin/configs
 
-touch ./bin/configs/apList.txt
+mkdir -p inventorys
 
-touch inventory
+touch ./bin/configs/apList.txt
