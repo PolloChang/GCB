@@ -1,0 +1,5 @@
+---
+
+- name: TWGCB-01-008-home remount /home
+  become: yes
+  command: mount -o remount,nodev,nosuid,noexec /home

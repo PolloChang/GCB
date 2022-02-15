@@ -1,0 +1,13 @@
+- name: TWGCB-01-008-0030
+  ansible.builtin.systemd:
+    name: autofs
+    state: stopped
+    enabled: no
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: TWGCB-01-008-0030
+  ansible.builtin.service:
+    name: autofs
+    state: stopped
+    enabled: no
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"

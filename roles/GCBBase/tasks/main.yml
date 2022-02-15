@@ -3,10 +3,27 @@
 # - include_tasks: TWGCB-01-008-0002.yml
 # - include_tasks: TWGCB-01-008-0003.yml
 
-- name: TWGCB-01-008-CentOS7
-  include_tasks: TWGCB-01-008-tmp-CentOS7.yml
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+- name: TWGCB-01-008 copy fstab
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/fstab
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
 
-- name: TWGCB-01-008-CentOS6
-  include_tasks: TWGCB-01-008-tmp-CentOS6.yml
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+# - name: TWGCB-01-008-tmp-CentOS7
+#   include_tasks: TWGCB-01-008-tmp-CentOS7.yml
+#   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+# - name: TWGCB-01-008-tmp-CentOS6
+#   include_tasks: TWGCB-01-008-tmp-CentOS6.yml
+#   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+
+# - include_tasks: TWGCB-01-008-dev-shm.yml
+
+# - include_tasks: TWGCB-01-008-home.yml
+
+# - include_tasks: TWGCB-01-008-0029.yml Ansible 會出錯暫時手動處理
+
+- include_tasks: TWGCB-01-008-0030.yml

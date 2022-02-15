@@ -3,15 +3,6 @@
 # ▪  可設定之參數如下：
 # (1) dev：允許建立裝置檔案
 # (2) nodev：禁止建立裝置檔案
----
-- name: TWGCB-01-008-tmp-CentOS6 copy fstab
-  become: yes
-  copy:
-    src: files/servers/{{server_name}}/etc/fstab
-    dest: /etc
-    owner: root
-    group: root
-    mode: 0644
 
 - name: TWGCB-01-008-tmp-CentOS6 remount /tmp
   become: yes

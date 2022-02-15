@@ -3,16 +3,6 @@
 # ▪  tmpfs是一個不存在於實體硬碟上，而是駐存在記憶體的特殊檔案系統，可提供優於傳統機械硬碟的存取速度
 # ▪  將/tmp目錄掛載到tmpfs，可於掛載選項上使用noexec選項，指定/tmp目錄不能啟動可執行二進制檔案，使攻擊者不能安裝執行惡意程式以降低風險
 
----
-- name: TWGCB-01-008-tmp-CentOS7 copy fstab
-  become: yes
-  copy:
-    src: files/servers/{{server_name}}/etc/fstab
-    dest: /etc
-    owner: root
-    group: root
-    mode: 0644
-
 - name: TWGCB-01-008-tmp-CentOS7 tmp
   ansible.builtin.systemd:
     name: tmp

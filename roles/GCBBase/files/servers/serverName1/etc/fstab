@@ -6,12 +6,39 @@
 # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
 #
 UUID=a0e9bfc6-7a3c-4f7c-ad41-321419042099 /                       ext4    defaults        1 1
-UUID=f6552c93-0892-46e8-b4fe-224fb2dc0f43 /home                   ext4    defaults        1 2
+UUID=f6552c93-0892-46e8-b4fe-224fb2dc0f43 /home                   ext4    defaults,nodev        1 2 # TWGCB-01-008-0016
 UUID=a91bdc08-59ce-470a-9b85-61eaff5429b7 swap                    swap    defaults        0 0
-tmpfs                   /dev/shm                tmpfs   defaults        0 0
+tmpfs                   /dev/shm                tmpfs   defaults,nodev,nosuid,noexec        0 0   # TWGCB-01-008-0017:TWGCB-01-008-0019
 devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
 sysfs                   /sys                    sysfs   defaults        0 0
 proc                    /proc                   proc    defaults        0 0
 
-# TWGCB-01-008-0004
+# TWGCB-01-008-0004:TWGCB-01-008-0007
 tmpfs /tmp tmpfs defaults,rw,nosuid,nodev,noexec,relatime 0 0
+
+# TWGCB-01-008-0008
+# /var 獨立磁碟空間
+
+# TWGCB-01-008-0009
+# /var/tmp 獨立磁碟空間
+
+# TWGCB-01-008-0010:TWGCB-01-008-0012
+# /var/tmp ...nosuid,nodev,noexec...
+
+# TWGCB-01-008-0013
+# /var/log 獨立磁碟空間
+
+# TWGCB-01-008-0014
+# /var/log/audit 獨立磁碟空間
+
+# TWGCB-01-008-0023:TWGCB-01-008-0025
+# ▪  開啟終端機，執行下列指令，尋找使用者家目錄(/home/使用者帳號)：
+#awk -F: '($3>=1000)&&($1!="nobody"){print $1,$3,$6}' /etc/passwd
+# ▪  執行下列指令，檢查/etc/fstab檔案，確認系統開機時掛載的檔案系統：
+#more /etc/fstab
+# ▪  若發現使用者家目錄掛載在獨立檔案系統，則編輯/etc/fstab檔案，在掛載點為「使用者家目錄」列，於第4欄加入「,nodev,nosuid,noexec」
+
+# TWGCB-01-008-0026:TWGCB-01-008-0028
+# ▪  開啟終端機，執行下列指令，檢查/etc/fstab檔案，確認系統開機時是否有掛載NFS檔案系統：
+#grep nfs /etc/fstab
+# ▪  若發現有掛載NFS檔案系統，則編輯/etc/fstab檔案，在掛載點為「NFS檔案系統」列，於第4欄加入「,nodev,nosuid,noexec」

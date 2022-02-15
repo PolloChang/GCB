@@ -1,0 +1,7 @@
+# ▪  這項原則設定決定所有具有全域寫入(World-writable)權限之目錄是否設定粘滯位(Sticky bit)
+# ▪  設定粘滯位(Sticky bit)確保只有擁有者才能刪除或更名自己建立的檔案，以防止其他使用者任意刪除或更名其他使用者的檔案
+- name: TWGCB-01-008-0029
+  become: yes
+  command: '{{item}}'
+  with_items:
+    - "df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type d \\( -perm -0002 -a ! -perm -1000 \\) 2>/dev/null | xargs -I '{}' chmod o+t '{}'"
