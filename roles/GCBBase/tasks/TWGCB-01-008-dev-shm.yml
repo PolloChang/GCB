@@ -1,0 +1,13 @@
+---
+- name: TWGCB-01-dev-shm-CentOS6 copy fstab
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/fstab
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-dev-shm-CentOS6 remount /tmp
+  become: yes
+  command: mount -o remount,nodev,nosuid,noexec /dev/shm
