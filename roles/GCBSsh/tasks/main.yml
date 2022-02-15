@@ -1,7 +1,7 @@
 ---
-#  - include_tasks: TWGCB-01-008-0263.yml
-# - include_tasks: TWGCB-01-008-0264.yml
-# - include_tasks: TWGCB-01-008-0267.yml
-# - include_tasks: TWGCB-01-008-0268.yml
-# - include_tasks: TWGCB-01-008-0270.yml
+  - include_tasks: TWGCB-01-008-0263.yml
+  - include_tasks: TWGCB-01-008-0264.yml
+  - include_tasks: TWGCB-01-008-0267.yml
+  - include_tasks: TWGCB-01-008-0268.yml
+  - include_tasks: TWGCB-01-008-0270.yml
   - include_tasks: TWGCB-01-008-0292.yml
