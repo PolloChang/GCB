@@ -1,5 +1,6 @@
 ---
 - name: push /etc/ssh/sshd_config
+  become: yes
   copy:
     src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/ssh/sshd_config
     dest: /etc/ssh

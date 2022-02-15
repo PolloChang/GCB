@@ -3,4 +3,5 @@
 # ▪  設定SSH主機公鑰檔案權限，避免遭未經授權的使用者修改檔案，導致主機SSH服務無法正常運作
 ---
 - name: TWGCB-01-008-0270
+  become: yes
   command: find /etc/ssh -xdev -type f -name 'ssh_host_*_key.pub' -exec chmod 644 {} \;

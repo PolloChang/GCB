@@ -1,5 +1,6 @@
 ---
 - name: Change user password
+  become: yes
   user:
     name: "{{ username }}"
     update_password: always

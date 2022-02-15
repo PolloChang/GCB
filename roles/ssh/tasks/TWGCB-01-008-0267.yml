@@ -3,4 +3,5 @@
 # ▪  設定SSH主機私鑰檔案擁有者與群組，避免遭未經授權的使用者取得檔案，用以假冒主機對用戶端進行中間人攻擊
 ---
 - name: TWGCB-01-008-0267
+  become: yes
   command: find /etc/ssh -xdev -type f -name 'ssh_host_*_key' -exec chown root:root {} \;

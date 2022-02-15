@@ -1,4 +1,5 @@
 - name: test push files
+  become: yes
   copy:
     src: files/test.md
     dest: /root

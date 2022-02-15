@@ -54,14 +54,17 @@ LogLevel INFO
 # Authentication:
 
 #LoginGraceTime 2m
+# TWGCB-01-008-0281
+LoginGraceTime 1m
 
 #TWGCB-01-008-0277
 #▪  這項原則設定決定SSH是否設定PermitRootLogin參數，用以決定root帳號是否可使用SSH進行登入
 #▪  禁止root帳號使用SSH進行登入，改請系統管理者使用其個人帳號進行登入，再透過sudo或su指令提升權限為root，以降低系統風險
 # 設定完 sshd 後再開啟
-PermitRootLogin yes
+PermitRootLogin no
 
-#StrictModes yes
+# TWGCB-01-008-0286
+StrictModes yes
 
 #TWGCB-01-008-0274
 #▪  這項原則設定決定SSH是否設定MaxAuthTries參數
@@ -69,7 +72,8 @@ PermitRootLogin yes
 #▪  建議將MaxAuthTries參數設定為較小的值，以降低針對SSH伺服器成功進行暴力攻擊之風險
 MaxAuthTries 4
 
-#MaxSessions 10
+# TWGCB-01-008-0285
+MaxSessions 10
 
 #RSAAuthentication yes
 #PubkeyAuthentication yes
@@ -86,9 +90,12 @@ MaxAuthTries 4
 #▪  此參數僅適用於SSH-2協定
 #▪  基於主機的身分驗證方式較不安全，建議停用
 HostbasedAuthentication no
+
+# TWGCB-01-008-0288
 # Change to yes if you don't trust ~/.ssh/known_hosts for
 # RhostsRSAAuthentication and HostbasedAuthentication
-#IgnoreUserKnownHosts no
+IgnoreUserKnownHosts yes
+
 # Don't read the user's ~/.rhosts and ~/.shosts files
 # TWGCB-01-008-0275
 #▪  這項原則設定決定SSH是否設定IgnoreRhosts參數
@@ -125,6 +132,7 @@ GSSAPICleanupCredentials yes
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
 
+# TWGCB-01-008-0282
 # Set this to 'yes' to enable PAM authentication, account processing, 
 # and session processing. If this is enabled, PAM authentication will 
 # be allowed through the ChallengeResponseAuthentication and
@@ -157,7 +165,10 @@ X11Forwarding no
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PrintMotd yes
-#PrintLastLog yes
+
+# TWGCB-01-008-0289
+PrintLastLog yes
+
 #TCPKeepAlive yes
 #UseLogin no
 #UsePrivilegeSeparation yes
@@ -167,7 +178,9 @@ X11Forwarding no
 #▪  PermitUserEnvironment參數決定是否允許使用者可藉由SSH守護程序變更環境設定
 #▪  禁止使用者藉由SSH守護程序變更環境設定，以避免使用者得以繞過系統存取限制
 PermitUserEnvironment no
-#Compression delayed
+
+# TWGCB-01-008-0287
+Compression delayed
 
 #TWGCB-01-008-0280
 #▪  這項原則設定決定是否設定SSH逾時時間
@@ -182,7 +195,10 @@ ClientAliveCountMax 0
 #ShowPatchLevel no
 #UseDNS yes
 #PidFile /var/run/sshd.pid
-#MaxStartups 10:30:100
+
+# TWGCB-01-008-02
+MaxStartups 10:30:60
+
 #PermitTunnel no
 #ChrootDirectory none
 

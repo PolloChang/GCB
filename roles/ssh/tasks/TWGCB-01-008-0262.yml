@@ -4,5 +4,6 @@
 # ▪  sshd(Openssh Server程式)實做SSH(Secure Shell)協定，可在兩個主機之間提供安全加密通訊
 # ▪  啟用sshd守護程序，以加密方式保護傳輸資訊，以防攻擊者藉由封包攔截取得明文機敏資訊
 - name: TWGCB-01-008-0262
+  become: yes
   command: systemctl --now enable sshd.service
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"

@@ -1,6 +1,7 @@
 ---
 
 - name: Ensure group "jameschang" exists
+  become: yes
   ansible.builtin.group:
     name: jameschang
     state: present
@@ -8,6 +9,7 @@
 
 
 - name: Add the user 'jameschang' with a specific uid and a primary group of 'admin'
+  become: yes
   ansible.builtin.user:
     name: jameschang
     comment: systemAdmin

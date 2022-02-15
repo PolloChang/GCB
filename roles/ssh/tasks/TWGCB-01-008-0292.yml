@@ -1,0 +1,9 @@
+# ▪  這項原則設定決定是否覆寫全系統加密原則，在SSH系統可設為覆寫或不使用全系統加密原則
+# ▪  設定SSH系統停用覆寫全系統加密原則，以避免SSH使用到安全強度較低之加密演算法
+---
+- name: TWGCB-01-008-0270
+  become: yes
+  command: sed -ri "s/^\s*(CRYPTO_POLICY\s*=.*)$/# \1/" /etc/sysconfig/sshd
+  args:
+    warn: false
+  
