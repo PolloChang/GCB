@@ -1,0 +1,18 @@
+# ▪  這項原則設定決定/tmp目錄是否啟用nodev選項，以禁止在/tmp目錄中建立裝置檔案
+# ▪  由於/tmp目錄用途不在於支援裝置，設定nodev選項以確保使用者無法在/tmp目錄建立裝置檔案或存取隨機硬體裝置，降低惡意程式感染風險
+# ▪  可設定之參數如下：
+# (1) dev：允許建立裝置檔案
+# (2) nodev：禁止建立裝置檔案
+---
+- name: TWGCB-01-008-tmp-CentOS6 copy fstab
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/fstab
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-tmp-CentOS6 remount /tmp
+  become: yes
+  command: mount -o remount,nodev /tmp

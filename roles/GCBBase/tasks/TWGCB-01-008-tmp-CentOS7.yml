@@ -4,7 +4,7 @@
 # ▪  將/tmp目錄掛載到tmpfs，可於掛載選項上使用noexec選項，指定/tmp目錄不能啟動可執行二進制檔案，使攻擊者不能安裝執行惡意程式以降低風險
 
 ---
-- name: TWGCB-01-008-0004 creat fstab
+- name: TWGCB-01-008-tmp-CentOS7 copy fstab
   become: yes
   copy:
     src: files/servers/{{server_name}}/etc/fstab
@@ -13,13 +13,13 @@
     group: root
     mode: 0644
 
-- name: TWGCB-01-008-0004 tmp
+- name: TWGCB-01-008-tmp-CentOS7 tmp
   ansible.builtin.systemd:
     name: tmp
     masked: no
     enabled: yes
 
-- name: TWGCB-01-008-0004 creat tmp.mount
+- name: TWGCB-01-008-tmp-CentOS7 copy tmp.mount
   become: yes
   copy:
     src: files/servers/{{server_name}}/etc/systemd/system/local-fs.target.wants/tmp.mount
@@ -28,7 +28,7 @@
     group: root
     mode: 0644
 
-- name: TWGCB-01-008-0004 remount /tmp
+- name: TWGCB-01-008-tmp-CentOS7 remount /tmp
   become: yes
   command: mount -o remount,nodev /tmp
 

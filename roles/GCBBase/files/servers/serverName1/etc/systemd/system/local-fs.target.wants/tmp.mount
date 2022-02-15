@@ -1,2 +1,10 @@
+# TWGCB-01-008-0004
 [Mount]
 Options=mode=1777,strictatime,noexec,nodev,nosuid
+
+# TWGCB-01-008-0005
+[Mount]
+What=tmpfs
+Where=/tmp
+Type=tmpfs
+
