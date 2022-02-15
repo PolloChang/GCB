@@ -1,0 +1,32 @@
+# ▪  這項原則設定決定是否支援cramfs檔案系統
+# ▪  cramfs (compressed ROM file system，壓縮唯讀閃存檔案系統)檔案系統是一開放式之Linux檔案系統，目的是更簡單更有效率
+# ▪  cramfs檔案系統以zlib壓縮資料，不需載入到記憶體中，因此可節省許多記憶體空間，可直接使用cramfs映像檔案無須先解壓，使用於某些舊系統或對記憶體有限制之地方
+# ▪  停止支援cramfs檔案系統，以降低系統被攻擊面
+
+---
+
+- name: TWGCB-01-008-0001 Check that the devnet.md exists
+  stat:
+    path: /etc/modprobe.d/cramfs.conf
+  register: file_status
+
+- name: TWGCB-01-008-0001 creat cramfs.conf
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/modprobe.d/cramfs.conf
+    dest: /etc/modprobe.d
+    owner: root
+    group: root
+    mode: 0644
+  when: file_status.stat.exists == False
+  
+- name: TWGCB-01-008-0001 Check that if the file cramfs.conf exists
+  debug:
+    msg: "File exists. Need people check TWGCB-01-008-0001"
+  when: file_status.stat.exists == True
+
+- name: TWGCB-01-008-0001 remove cramfs
+  become: yes
+  command: rmmod cramfs
+  ignore_errors: yes
+
