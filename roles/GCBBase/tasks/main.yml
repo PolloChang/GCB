@@ -1,0 +1,8 @@
+---
+# - include_tasks: TWGCB-01-008-0001.yml
+# - include_tasks: TWGCB-01-008-0002.yml
+# - include_tasks: TWGCB-01-008-0003.yml
+
+- name: restart sshd 7
+  include_tasks: TWGCB-01-008-0004.yml
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"

@@ -1,0 +1,36 @@
+# ▪  這項原則設定決定/tmp目錄是否使用tmpfs檔案系統
+# ▪  /tmp是具有全域寫入權限之目錄，所有使用者與某些應用程式都將其用於暫存檔案
+# ▪  tmpfs是一個不存在於實體硬碟上，而是駐存在記憶體的特殊檔案系統，可提供優於傳統機械硬碟的存取速度
+# ▪  將/tmp目錄掛載到tmpfs，可於掛載選項上使用noexec選項，指定/tmp目錄不能啟動可執行二進制檔案，使攻擊者不能安裝執行惡意程式以降低風險
+
+---
+- name: TWGCB-01-008-0004 creat fstab
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/fstab
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-0004 tmp
+  ansible.builtin.systemd:
+    name: tmp
+    masked: no
+    enabled: yes
+
+- name: TWGCB-01-008-0004 creat tmp.mount
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/systemd/system/local-fs.target.wants/tmp.mount
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-0004 remount /tmp
+  become: yes
+  command: mount -o remount,nodev /tmp
+
+
+
