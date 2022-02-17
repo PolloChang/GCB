@@ -3,6 +3,12 @@
 # ▪  定期檢查檔案系統完整性，可協助系統管理者定期確認是否有重要檔案在未經授權的情況下被修改
 
 ---
+
+- name: TWGCB-01-008-0037 install aide
+  yum:
+    name: aide
+    state: latest
+
 - name: TWGCB-01-008-0037
   become: yes
   ansible.builtin.cron:
