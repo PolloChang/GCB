@@ -26,4 +26,5 @@
 
 # - include_tasks: TWGCB-01-008-0029.yml Ansible 會出錯暫時手動處理
 
-- include_tasks: TWGCB-01-008-0030.yml
+# - include_tasks: TWGCB-01-008-0030.yml
+- include_tasks: TWGCB-01-008-0031.yml

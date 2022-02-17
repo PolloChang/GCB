@@ -1,0 +1,31 @@
+# ▪  這項原則設定決定是否使用USB儲存裝置
+# ▪  USB儲存裝置提供檔案傳輸與儲存方式，USB儲存裝置的廣泛使用，致使USB惡意程式成為滲透入侵的常見手段
+# ▪  停用USB儲存裝置將減少系統實體攻擊面，以及降低引入惡意程式之風險
+
+---
+
+- name: TWGCB-01-008-0031 Check that the devnet.md exists
+  stat:
+    path: /etc/modprobe.d/usb-storage.conf
+  register: file_status
+
+- name: TWGCB-01-008-0031 creat usb-storage.conf
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/modprobe.d/usb-storage.conf
+    dest: /etc/modprobe.d
+    owner: root
+    group: root
+    mode: 0644
+  when: file_status.stat.exists == False
+  
+- name: TWGCB-01-008-0031 Check that if the file usb-storage.conf exists
+  debug:
+    msg: "File exists. Need people check TWGCB-01-008-0031"
+  when: file_status.stat.exists == True
+
+- name: TWGCB-01-008-0031 remove cramfs
+  become: yes
+  command: rmmod usb-storage
+  ignore_errors: yes
+
