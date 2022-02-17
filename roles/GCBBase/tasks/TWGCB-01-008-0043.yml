@@ -1,0 +1,23 @@
+# ▪  這項原則設定決定系統開機時是否立即啟用記憶體位址空間配置隨機載入(Address space layout randomization, ASLR)功能
+# ▪  ASLR利用隨機方式配置資料位址，使得敏感資料(例如作業系統核心程式)能配置到一個惡意程式未能事先得知的位址
+# ▪  啟用記憶體位址空間配置隨機載入，提高攻擊的難度，以降低緩衝區溢位攻擊的威脅
+# ▪  可設定參數如下：
+# (1) 0：停用ASLR功能
+# (2) 1：隨機配置堆疊(Stack)、記憶體映射函數(mmap)及vDSO(Virtual Dynamically-linked Shared Object，虛擬動態連結共享物件)頁面
+# (3) 2：隨機配置堆疊(Stack)、記憶體映射函數(mmap)、vDSO頁面及堆積(Heap)
+---
+
+- name: TWGCB-01-008-0043 creat gcb.conf
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/sysctl.d/gcb.conf
+    dest: /etc/sysctl.d
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-0043 
+  become: yes
+  command: sysctl -w kernel.randomize_va_space=2
+  ignore_errors: yes
+
