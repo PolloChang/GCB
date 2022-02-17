@@ -1,0 +1,11 @@
+# TWGCB-01-008-0034
+# ▪  這項原則設定決定sudo指令是否使用pty(pseudo terminal，虛擬終端)
+# ▪  pty是一對提供雙向通訊的虛擬終端設備，分別為主要(master)與從屬(slave)設備，從屬設備提供模擬硬體終端機設備，主要設備提供模擬終端機程序以操作控制從屬設備
+# ▪  攻擊者在使用sudo執行惡意程序時，在主程序完成後可能會衍生另一個背景程序保留在終端設備上，sudo設定為使用pty時可避免此情況
+Defaults use_pty
+
+# TWGCB-01-008-0035
+# ▪  這項原則設定決定是否設定sudo自定義日誌檔案
+# ▪  預設情況下sudo藉由syslog記錄日誌，但sudo可在設定檔(預設為/etc/sudoers)中自定義日誌檔案，有助於簡化sudo指令的稽核工作
+ 
+Defaults logfile="/var/log/sudo.log"

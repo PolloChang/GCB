@@ -28,4 +28,14 @@
 
 # - include_tasks: TWGCB-01-008-0030.yml
 # - include_tasks: TWGCB-01-008-0031.yml
-- include_tasks: TWGCB-01-008-0032.yml
+# - include_tasks: TWGCB-01-008-0032.yml
+
+# - name: TWGCB-01-008-0033 install sudo
+#   become: yes
+#   yum:
+#     name: sudo
+#     state: latest
+#   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- include_tasks: TWGCB-01-008-sudo.yml
+
