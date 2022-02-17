@@ -1,0 +1,28 @@
+# ▪  這項原則設定決定是否啟用GPG簽章驗證功能
+# ▪  gpgcheck決定在安裝套件前，是否先進行RPM套件簽章檢查，可用以確保欲安裝之RPM套件來自可信賴來源，避免安裝已被竄改之檔案
+# ▪  gpgcheck選項存在於/etc/yum.conf設定檔與/etc/yum/repos.d/目錄下的所有設定檔
+# ▪  gpgcheck選項可設定參數如下：
+# (1) 1：啟用，先進行RPM套件簽章檢查，通過後才能安裝套件
+# (2) 0：停用，安裝前不進行RPM套件簽章檢查
+---
+
+- name: TWGCB-01-008-0032 Check that the yum.conf exists
+  stat:
+    path: /etc/yum.conf
+  register: file_status
+
+- name: TWGCB-01-008-0032 creat yum.conf
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/yum.conf
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+  when: file_status.stat.exists == False
+  
+- name: TWGCB-01-008-0032 Check that if the file yum.conf exists
+  debug:
+    msg: "File exists. Need people check TWGCB-01-008-0032"
+  when: file_status.stat.exists == True
+
