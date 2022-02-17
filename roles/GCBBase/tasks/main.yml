@@ -42,3 +42,7 @@
 - name: TWGCB-01-008-0037  
   include_tasks: TWGCB-01-008-0037.yml
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: TWGCB-01-008-0038  
+  include_tasks: TWGCB-01-008-0038.yml
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"

@@ -1,0 +1,8 @@
+- name: TWGCB-01-008-0038
+  ansible.builtin.file:
+    path: "{{item}}"
+    owner: root
+    group: root
+  with_items:
+    - '/boot/grub2/grub.cfg'
+    - '/boot/grub2/grubenv'
