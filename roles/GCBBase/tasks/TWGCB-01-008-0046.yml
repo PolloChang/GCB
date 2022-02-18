@@ -1,0 +1,19 @@
+# TWGCB-01-008-0045
+# ▪  這項原則設定決定/etc/passwd檔案權限
+# ▪  /etc/passwd記錄每位使用者的名稱、密碼、使用者ID、群組ID及家目錄等資訊
+# ▪  將/etc/passwd檔案權限設為僅root擁有讀取與寫入權限，其餘所有使用者僅可讀取，避免/etc/passwd檔案遭未授權使用者修改，降低檔案被竄改後進一步利用於其他惡意攻擊之風險
+# TWGCB-01-008-0046
+# ▪  這項原則設定決定/etc/passwd檔案權限
+# ▪  /etc/passwd記錄每位使用者的名稱、密碼、使用者ID、群組ID及家目錄等資訊
+# ▪  將/etc/passwd檔案權限設為僅root擁有讀取與寫入權限，其餘所有使用者僅可讀取，避免/etc/passwd檔案遭未授權使用者修改，降低檔案被竄改後進一步利用於其他惡意攻擊之風險
+
+
+---
+
+- name: TWGCB-01-008-0045:TWGCB-01-008-0046 /etc/passwd
+  become: yes
+  ansible.builtin.file:
+    path: /etc/passwd
+    owner: root
+    group: root
+    mode: '0644'
