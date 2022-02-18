@@ -1,0 +1,18 @@
+# TWGCB-01-008-0049
+# ▪  這項原則設定決定/etc/group檔案擁有者與群組
+# ▪  /etc/group記錄每個群組的名稱、密碼、ID及屬於該群組的使用者清單
+# ▪  設定/etc/group檔案擁有者與群組為root，避免/etc/group檔案遭未授權使用者修改
+# TWGCB-01-008-0050
+# ▪  這項原則設定決定/etc/group檔案權限
+# ▪  /etc/group記錄每個群組的名稱、密碼、ID及屬於該群組的使用者清單
+# ▪  設定/etc/group檔案權限，僅root擁有讀寫權限，其餘所有使用者僅可讀取，避免/etc/group檔案遭未授權使用者修改
+
+---
+
+- name: TWGCB-01-008-0049:TWGCB-01-008-0050 /etc/group
+  become: yes
+  ansible.builtin.file:
+    path: /etc/group
+    owner: root
+    group: root
+    mode: '0644'
