@@ -8,10 +8,10 @@
 # ▪  設定/etc/passwd-檔案權限，僅root擁有讀取與寫入權限，避免/etc/passwd-檔案遭未授權使用者修改，降低檔案被竄改後進一步利用於其他惡意攻擊之風險
 ---
 
-- name: TWGCB-01-008-0053:TWGCB-01-008-0054 /etc/passwd
+- name: TWGCB-01-008-0053:TWGCB-01-008-0054 /etc/passwd-
   become: yes
   ansible.builtin.file:
-    path: /etc/passwd
+    path: /etc/passwd-
     owner: root
     group: root
     mode: '0600'
