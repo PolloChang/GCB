@@ -59,4 +59,11 @@
 # - include_tasks: TWGCB-01-008-0057.yml
 # - include_tasks: TWGCB-01-008-0059.yml
 # - include_tasks: TWGCB-01-008-0073.yml
- - include_tasks: TWGCB-01-008-0092.yml
+# - include_tasks: TWGCB-01-008-0092.yml
+
+# - name: TWGCB-01-008-tmp-CentOS6
+#   include_tasks: TWGCB-01-008-0093.yml
+#   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+
+# - include_tasks: TWGCB-01-008-0094.yml

@@ -7,7 +7,7 @@
 # ▪  這項原則設定決定是否允許root帳號的路徑(PATH)變數存在具有world-writable權限或group-writable權限之目錄
 # ▪  root可以執行系統上所有指令，若PATH變數包含world-writable(全域寫入)權限或group-writable(群組身分寫入)權限之目錄，將可能導致root執行到惡意程式，危害系統安全
 ---
-- name: TWGCB-01-008-0073 copy tmp.mount
+- name: TWGCB-01-008-0073 copy profile
   become: yes
   copy:
     src: files/servers/{{server_name}}/etc/profile

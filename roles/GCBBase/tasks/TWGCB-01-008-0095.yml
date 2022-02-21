@@ -1,0 +1,12 @@
+# TWGCB-01-008-0095
+# ▪  這項原則設定決定是否啟用avahi-daemon服務，以運行Avahi伺服器
+# ▪  Avahi實做零配置網路服務規範(zeroconf)，使用者無需進行手動設定，系統即可自動連線區域網路中之各種網路裝置與服務(如印表機、DNS)
+# ▪  停用avahi-daemon服務可降低系統被攻擊面
+---
+- name: TWGCB-01-008-0095
+  become: yes 
+  ansible.builtin.service:
+    name: avahi-daemon
+    enabled: no
+    state: stopped
+  ignore_errors: yes

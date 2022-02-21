@@ -1,0 +1,13 @@
+# TWGCB-01-008-0094
+# ▪  這項原則設定決定是否啟用rsyncd服務
+# ▪  rsyncd服務用於透過網路連接在兩台電腦之間同步檔案與目錄，並可利用差分編碼以減少資料傳輸量
+# ▪  由於rsyncd服務使用未加密協議進行資料傳輸，停用rsyncd服務可降低資安風險
+
+---
+- name: TWGCB-01-008-0094
+  become: yes 
+  ansible.builtin.service:
+    name: rsyncd
+    enabled: no
+    state: stopped
+  ignore_errors: yes

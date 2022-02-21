@@ -1,0 +1,13 @@
+# TWGCB-01-008-0093
+# ▪  這項原則設定決定是否設定chrony守護程序之校時來源
+# ▪  chrony是一個守護程序，藉由實做網路時間協定(NTP)，以於各系統之間同步系統時間，並可使用高準確之校時來源
+# ▪  設定chrony校時來源，以確保系統時間正確
+---
+- name: TWGCB-01-008-0093 copy profile
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/chrony.conf
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
