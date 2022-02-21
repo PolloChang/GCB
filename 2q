@@ -1,0 +1,11 @@
+# TWGCB-01-008-0092
+# ▪  這項原則設定決定是否移除xinetd套件
+# ▪  xinetd(Extended Internet daemon)套件取代原有的inetd守護程序，負責管理網路相關服務
+# ▪  xinetd監聽來自網路之請求，進而啟動相應服務，可以用來啟動使用特權埠與非特權埠的服務
+# ▪  移除xinetd套件可降低系統被攻擊面
+---
+- name: TWGCB-01-008-0092 remove xinetd
+  become: yes
+  dnf:
+      name: xinetd
+      state: absent

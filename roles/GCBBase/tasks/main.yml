@@ -48,9 +48,9 @@
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
 
-- include_tasks: TWGCB-01-008-etc-passwd.yml
-- include_tasks: TWGCB-01-008-etc-gshadow.yml
-- include_tasks: TWGCB-01-008-etc-group.yml
+# - include_tasks: TWGCB-01-008-etc-passwd.yml
+# - include_tasks: TWGCB-01-008-etc-gshadow.yml
+# - include_tasks: TWGCB-01-008-etc-group.yml
 
 # - include_tasks: TWGCB-01-008-0043.yml
 # - include_tasks: TWGCB-01-008-0047.yml
@@ -59,3 +59,4 @@
 # - include_tasks: TWGCB-01-008-0057.yml
 # - include_tasks: TWGCB-01-008-0059.yml
 # - include_tasks: TWGCB-01-008-0073.yml
+ - include_tasks: TWGCB-01-008-0092.yml
