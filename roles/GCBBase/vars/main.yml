@@ -4,3 +4,15 @@ remove_packages:
     - 'telnet-server' # TWGCB-01-008-0104
     - 'rsh-server'    # TWGCB-01-008-0105
     - 'tftp-server'   # TWGCB-01-008-0106
+
+service_disable:
+    - 'autofs' # TWGCB-01-008-0030
+    - 'rsyncd' # TWGCB-01-008-0094
+    - 'avahi-daemon' # TWGCB-01-008-0095
+    - 'squid' # TWGCB-01-008-0097
+    - 'smb' # TWGCB-01-008-0098
+    - 'vsftpd' # TWGCB-01-008-0099
+    - 'ypserv'
+
+service_enable:
+    - 'kdump' # TWGCB-01-008-0101

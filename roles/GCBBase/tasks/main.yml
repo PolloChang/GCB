@@ -21,12 +21,10 @@
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
 
 # - include_tasks: TWGCB-01-008-dev-shm.yml
-
 # - include_tasks: TWGCB-01-008-home.yml
 
 # - include_tasks: TWGCB-01-008-0029.yml Ansible 會出錯暫時手動處理
 
-# - include_tasks: TWGCB-01-008-0030.yml
 # - include_tasks: TWGCB-01-008-0031.yml
 # - include_tasks: TWGCB-01-008-0032.yml
 
@@ -48,7 +46,6 @@
 #   include_tasks: TWGCB-01-008-0038.yml
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
-
 # - include_tasks: TWGCB-01-008-etc-passwd.yml
 # - include_tasks: TWGCB-01-008-etc-gshadow.yml
 # - include_tasks: TWGCB-01-008-etc-group.yml
@@ -66,12 +63,7 @@
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
 
-# - include_tasks: TWGCB-01-008-0094.yml
-# - include_tasks: TWGCB-01-008-0095.yml
-# - include_tasks: TWGCB-01-008-0097.yml
 # - include_tasks: TWGCB-01-008-0098.yml
-# - include_tasks: TWGCB-01-008-0099.yml
-# - include_tasks: TWGCB-01-008-0100.yml
 # - include_tasks: TWGCB-01-008-0101.yml
 # - include_tasks: TWGCB-01-008-0102.yml
 
@@ -84,4 +76,6 @@
 
 # - include_tasks: TWGCB-01-008-0136.yml
 
-- include_tasks: TWGCB-01-008-rules.yml
+# - include_tasks: TWGCB-01-008-rules.yml
+- include_tasks: TWGCB-01-008-service-disable.yml
+- include_tasks: TWGCB-01-008-service-enable.yml
