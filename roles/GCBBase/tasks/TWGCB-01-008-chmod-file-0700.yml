@@ -1,0 +1,15 @@
+
+- name: TWGCB-01-008-chmod-file-0700 in CentOS
+  ansible.builtin.file:
+    path: "{{item}}"
+    owner: root
+    group: root
+    mode: '0600'
+  with_items:
+    - '/etc/cron.hourly' # TWGCB-01-008-0195,TWGCB-01-008-0196
+    - ' /etc/cron.daily' # TWGCB-01-008-0197,TWGCB-01-008-0198
+    - '/etc/cron.weekly' # TWGCB-01-008-0199,TWGCB-01-008-0200
+    - '/etc/cron.monthly' # TWGCB-01-008-0201,TWGCB-01-008-0202
+    - '/etc/cron.d' # TWGCB-01-008-0203,TWGCB-01-008-0204
+  when: ansible_distribution == "CentOS"
+  

@@ -1,0 +1,25 @@
+- name: TWGCB-01-008-chmod-file-0600  in CentOS 7
+  ansible.builtin.file:
+    path: "{{item}}"
+    owner: root
+    group: root
+    mode: '0600'
+  with_items:
+    - '/boot/grub2/grub.cfg' # TWGCB-01-008-0038
+    - '/boot/grub2/grubenv' # TWGCB-01-008-0039
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+  
+
+
+- name: TWGCB-01-008-chmod-file-0600 in CentOS
+  ansible.builtin.file:
+    path: "{{item}}"
+    owner: root
+    group: root
+    mode: '0600'
+  with_items:
+    - '/etc/passwd-' # TWGCB-01-008-0053
+    - '/etc/audit/rules.d/audit.rules' # TWGCB-01-008-0141
+    - '/etc/crontab'
+  when: ansible_distribution == "CentOS"
+  

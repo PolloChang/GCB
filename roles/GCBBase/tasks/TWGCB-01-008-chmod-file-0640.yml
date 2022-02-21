@@ -1,0 +1,12 @@
+
+
+- name: TWGCB-01-008-chmod-file-0640 in CentOS
+  ansible.builtin.file:
+    path: "{{item}}"
+    owner: root
+    group: root
+    mode: '0640'
+  with_items:
+    - '/etc/audit/auditd.conf' # TWGCB-01-008-0142
+  when: ansible_distribution == "CentOS"
+  
