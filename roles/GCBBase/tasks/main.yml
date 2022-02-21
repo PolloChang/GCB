@@ -76,8 +76,9 @@
 # - include_tasks: TWGCB-01-008-service-disable.yml
 # - include_tasks: TWGCB-01-008-service-enable.yml
 
-- include_tasks: TWGCB-01-008-chmod-file-0600.yml
-- include_tasks: TWGCB-01-008-chmod-file-0640.yml
+# - include_tasks: TWGCB-01-008-chmod-file-0600.yml
+# - include_tasks: TWGCB-01-008-chmod-file-0640.yml
 - include_tasks: TWGCB-01-008-chmod-file-0700.yml
 
-- include_tasks: TWGCB-01-008-logs.yml
+# - include_tasks: TWGCB-01-008-logs.yml
+- include_tasks: TWGCB-01-008-auditd.yml

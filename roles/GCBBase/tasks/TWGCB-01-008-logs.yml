@@ -2,5 +2,5 @@
   become: yes
   command: "{{ item }}"
   with_items:
-    - 'find /var/log -type f -exec chmod g-wx,o-rwx "{}" +'
-    - 'find /var/log -type d -exec chmod g-w,o-rwx "{}" +'
+    - 'find /var/log -type f -exec chmod g-wx,o-rwx "{}" +' # TWGCB-01-008-0183
+    - 'find /var/log -type d -exec chmod g-w,o-rwx "{}" +' # TWGCB-01-008-0184

@@ -1,0 +1,10 @@
+---
+
+- name: TWGCB-01-008-auditd
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/audit/auditd.conf
+    dest: /etc/audit
+    owner: root
+    group: root
+    mode: 0640
