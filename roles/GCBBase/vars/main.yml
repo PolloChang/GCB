@@ -16,3 +16,6 @@ service_disable:
 
 service_enable:
     - 'kdump' # TWGCB-01-008-0101
+    - 'auditd' # TWGCB-01-008-0133
+    - 'rsyslog' # TWGCB-01-008-0175
+    - 'crond' # TWGCB-01-008-0192
