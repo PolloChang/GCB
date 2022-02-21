@@ -82,3 +82,30 @@ chown root:root (稽核日誌目錄名稱)
 chown root:root /var/log/audit
 chmod 600 /var/log/audit
 ```
+
+## TWGCB-01-008-0206,TWGCB-01-008-0205
+
+* 刪除前請先調查
+
+開啟終端機，執行以下指令，移除/etc/cron.deny與/etc/at.deny，並建立/etc/cron.allow與/etc/at.allow後，設定其權限為600或更低權限：
+
+```shell
+rm /etc/cron.deny
+rm /etc/at.deny
+touch /etc/cron.allow
+touch /etc/at.allow
+chown root:root /etc/cron.allow
+chown root:root /etc/at.allow
+chmod 600 /etc/cron.allow
+chmod 600 /etc/at.allow
+```
+
+## TWGCB-01-008-0183
+
+開啟終端機，執行以下指令，設定var/log目錄下所有日誌檔案之權限為g-wx,o-rwx或更低權限：
+
+
+```shell
+find /var/log -type f -exec chmod g-wx,o-rwx "{}" +
+find /var/log -type d -exec chmod g-w,o-rwx "{}" +
+```
