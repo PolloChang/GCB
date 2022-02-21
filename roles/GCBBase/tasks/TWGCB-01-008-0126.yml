@@ -1,0 +1,26 @@
+# ▪  這項原則設定決定是否啟用DCCP協定
+# ▪  DCCP協定(Datagram Congestion Control Protocol，封包壅塞控制協定)是一個擁有壅塞控制機制的非可靠式傳輸層網路通訊協定，其特性適合用於多媒體資料串流
+# ▪  停用DCCP協定可降低系統被攻擊面
+
+---
+
+- name: TWGCB-01-008-0126 Check that the dccp.conf exists
+  stat:
+    path: /etc/modprobe.d/dccp.conf
+  register: file_status
+
+- name: TWGCB-01-008-0126 creat dccp.conf
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/modprobe.d/dccp.conf
+    dest: /etc/modprobe.d
+    owner: root
+    group: root
+    mode: 0644
+  when: file_status.stat.exists == False
+  
+- name: TWGCB-01-008-0126 Check that if the file dccp.conf exists
+  debug:
+    msg: "File exists. Need people check TWGCB-01-008-0126"
+  when: file_status.stat.exists == True
+
