@@ -25,3 +25,19 @@ grep -Els "^\s*net\.ipv4\.conf\.all\.rp_filter\s*=\s*0" /etc/sysctl.conf /etc/sy
 ```shell
 grep -Els "^\s*net\.ipv4\.tcp_syncookies\s*=\s*[02]*" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv4\.tcp_syncookies\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/" $filename; done; sysctl -w net.ipv4.tcp_syncookies=1; sysctl -w net.ipv4.route.flush=1
 ```
+
+
+# TWGCB-01-008-0131
+
+▪  開啟終端機，執行以下指令，檢查網路介面是否處於混雜模式：
+
+```shell
+#ip link | grep -i promisc
+```
+
+▪  若發現網路介面處於混雜模式，則執行以下指令，關閉網路介面混雜模式：
+
+
+```shell
+#ip link set dev (網路介面裝置名稱) multicast off promisc off
+```

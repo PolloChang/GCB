@@ -1,0 +1,9 @@
+---
+- name: TWGCB-01-008-0136 copy profile
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/aliases
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644

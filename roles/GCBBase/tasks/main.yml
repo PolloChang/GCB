@@ -77,7 +77,11 @@
 
 # - include_tasks: TWGCB-01-008-remove-package.yml
 
-- include_tasks: TWGCB-01-008-0126.yml
-- include_tasks: TWGCB-01-008-0127.yml
-- include_tasks: TWGCB-01-008-0128.yml
-- include_tasks: TWGCB-01-008-0129.yml
+# - include_tasks: TWGCB-01-008-0126.yml
+# - include_tasks: TWGCB-01-008-0127.yml
+# - include_tasks: TWGCB-01-008-0128.yml
+# - include_tasks: TWGCB-01-008-0129.yml
+
+# - include_tasks: TWGCB-01-008-0136.yml
+
+- include_tasks: TWGCB-01-008-rules.yml
