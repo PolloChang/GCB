@@ -13,7 +13,7 @@
     - '/etc/cron.d' # TWGCB-01-008-0203,TWGCB-01-008-0204
   when: ansible_distribution == "CentOS"
 
-  - name: TWGCB-01-008-chmod-file-root in CentOS
+- name: TWGCB-01-008-chmod-file-root in CentOS
   ansible.builtin.file:
     path: "{{item}}"
     owner: root
