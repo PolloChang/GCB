@@ -1,30 +1,30 @@
-# TWGCB-01-008-0095
-# ▪  這項原則設定決定是否啟用avahi-daemon服務，以運行Avahi伺服器
-# ▪  Avahi實做零配置網路服務規範(zeroconf)，使用者無需進行手動設定，系統即可自動連線區域網路中之各種網路裝置與服務(如印表機、DNS)
-# ▪  停用avahi-daemon服務可降低系統被攻擊面
+# TWGCB-01-008-0098
+# ▪  這項原則設定決定是否啟用Samba服務
+# ▪  Samba運用SMB ( Server message block)協定分享目錄與檔案予微軟Windows作業系統
+# ▪  停用Samba服務可降低系統被攻擊面
 ---
-- name: TWGCB-01-008-0095 in CentOS 8
+- name: TWGCB-01-008-0098 in CentOS 8
   become: yes 
   ansible.builtin.systemd:
-    name: avahi-daemon
+    name: smb
     enabled: no
     state: stopped
   ignore_errors: yes
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
   
-- name: TWGCB-01-008-0095 in CentOS 7
+- name: TWGCB-01-008-0098 in CentOS 7
   become: yes 
   ansible.builtin.systemd:
-    name: avahi-daemon
+    name: smb
     enabled: no
     state: stopped
   ignore_errors: yes
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
-- name: TWGCB-01-008-0095 in CentOS 6
+- name: TWGCB-01-008-0098 in CentOS 6
   become: yes 
   ansible.builtin.service:
-    name: avahi-daemon
+    name: smb
     enabled: no
     state: stopped
   ignore_errors: yes

@@ -1,0 +1,6 @@
+remove_packages:
+    - 'ypbind'        # TWGCB-01-008-0102
+    - 'telnet'        # TWGCB-01-008-0103
+    - 'telnet-server' # TWGCB-01-008-0104
+    - 'rsh-server'    # TWGCB-01-008-0105
+    - 'tftp-server'   # TWGCB-01-008-0106

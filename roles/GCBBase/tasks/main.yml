@@ -37,6 +37,7 @@
 #     state: latest
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
+- include_tasks: TWGCB-01-008-sysctl.yml
 # - include_tasks: TWGCB-01-008-sudo.yml
 
 # - name: TWGCB-01-008-0037  
@@ -52,7 +53,6 @@
 # - include_tasks: TWGCB-01-008-etc-gshadow.yml
 # - include_tasks: TWGCB-01-008-etc-group.yml
 
-# - include_tasks: TWGCB-01-008-0043.yml
 # - include_tasks: TWGCB-01-008-0047.yml
 # - include_tasks: TWGCB-01-008-0053.yml
 # - include_tasks: TWGCB-01-008-0055.yml
@@ -67,3 +67,12 @@
 
 
 # - include_tasks: TWGCB-01-008-0094.yml
+# - include_tasks: TWGCB-01-008-0095.yml
+# - include_tasks: TWGCB-01-008-0097.yml
+# - include_tasks: TWGCB-01-008-0098.yml
+# - include_tasks: TWGCB-01-008-0099.yml
+# - include_tasks: TWGCB-01-008-0100.yml
+# - include_tasks: TWGCB-01-008-0101.yml
+# - include_tasks: TWGCB-01-008-0102.yml
+
+# - include_tasks: TWGCB-01-008-remove-package.yml

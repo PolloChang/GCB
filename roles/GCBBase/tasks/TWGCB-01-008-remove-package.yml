@@ -1,0 +1,26 @@
+# 移除軟體
+---
+- name: TWGCB-01-008-0106 remove tftp-server in CentOS 8
+  become: yes
+  dnf:
+      name: "{{ item }}"
+      state: absent
+  loop: "{{ remove_packages }}"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
+
+
+- name: TWGCB-01-008-0106 remove tftp-server in CentOS 7
+  become: yes
+  yum:
+      name: "{{ item }}"
+      state: absent
+  loop: "{{ remove_packages }}"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: TWGCB-01-008-0106 remove tftp-server in CentOS 6
+  become: yes
+  yum:
+      name: "{{ item }}"
+      state: absent
+  loop: "{{ remove_packages }}"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
