@@ -4,6 +4,8 @@ remove_packages:
     - 'telnet-server' # TWGCB-01-008-0104
     - 'rsh-server'    # TWGCB-01-008-0105
     - 'tftp-server'   # TWGCB-01-008-0106
+    - 'setroubleshoot' # TWGCB-01-008-0190
+    - 'mcstrans'      # TWGCB-01-008-0191
 
 service_disable:
     - 'autofs' # TWGCB-01-008-0030
