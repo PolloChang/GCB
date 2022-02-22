@@ -203,3 +203,27 @@ umask 027
 ```shell
 ll /etc/profile.d/*.sh
 ```
+
+## TWGCB-01-008-0231
+
+▪  開啟終端機，執行以下指令，尋找「NOPASSWD」或「!authenticate」：
+
+```shell
+#egrep -i '(nopasswd|!authenticate)' /etc/sudoers /etc/sudoers.d/*
+```
+
+▪  執行「visudo -f」指令編輯/etc/sudoers檔案或 /etc/sudoers.d/目錄下的檔案，針對包含「NOPASSWD」或「!authenticate」的指令行，予以註解(#)或刪除
+
+## TWGCB-01-008-0237
+
+▪  開啟終端機，執行以下指令，設定系統帳號(sync、shutdown及halt帳號除外)不可使用殼層(Shell)登入：
+
+```shell
+awk -F: '($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $1!~/^\+/ && $3<'"$(awk '/^\s*UID_MIN/{print $2}' /etc/login.defs)"' && $7!="'"$(which nologin)"'" && $7!="/bin/false") {print $1}' /etc/passwd | while read user; do usermod -s $(which nologin) $user; done
+```
+
+▪  執行以下指令，鎖定所有非root之系統帳號：
+
+```shell
+awk -F: '($1!="root" && $1!~/^\+/ && $3<'"$(awk '/^\s*UID_MIN/{print $2}' /etc/login.defs)"') {print $1}' /etc/passwd | xargs -I '{}' passwd -S '{}' | awk '($2!="L" && $2!="LK") {print $1}' | while read user; do usermod -L $user; done
+```

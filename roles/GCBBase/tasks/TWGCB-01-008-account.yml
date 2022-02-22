@@ -26,3 +26,21 @@
     owner: root
     group: root
     mode: 0644
+
+- name: TWGCB-01-008-account /etc/security/limits.d/gcb.conf
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/security/limits.d/gcb.conf
+    dest: /etc/security/limits.d
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-account /etc/pam.d/su
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/pam.d/su
+    dest: /etc/pam.d
+    owner: root
+    group: root
+    mode: 0644

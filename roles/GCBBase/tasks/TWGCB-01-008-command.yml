@@ -1,0 +1,8 @@
+
+- name: TWGCB-01-008-command
+  become: yes
+  command: "{{ item }}"
+  with_items:
+    - 'useradd -D -f 30' # TWGCB-01-008-0228
+    - 'usermod -g 0 root' # TWGCB-01-008-0240
+
