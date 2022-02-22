@@ -1,0 +1,23 @@
+#%PAM-1.0
+auth [user_unknown=ignore success=ok ignore=ignore default=bad] pam_securetty.so
+auth       include      system-auth
+account    required     pam_nologin.so
+account    include      system-auth
+password   include      system-auth
+# pam_selinux.so close should be the first session rule
+session    required     pam_selinux.so close
+session    required     pam_loginuid.so
+session    optional     pam_console.so
+# pam_selinux.so open should only be followed by sessions to be executed in the user context
+session    required     pam_selinux.so open
+session    required     pam_namespace.so
+session    optional     pam_keyinit.so force revoke
+session    include      system-auth
+-session   optional     pam_ck_connector.so
+
+
+# 各引數解釋:
+# even_deny_root #也限制root使用者；
+# deny=3 #設定普通使用者和root使用者連續錯誤登陸的最大次數，超過最大次數，則鎖定該使用者
+# unlock_time=20 #設定普通使用者鎖定後，多少時間後解鎖，單位是秒；
+# root_unlock_time #設定root使用者鎖定後，多少時間後解鎖，單位是秒；

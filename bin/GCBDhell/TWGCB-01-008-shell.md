@@ -168,5 +168,38 @@ auth.*,authpriv.* /var/log/secure
 daemon.* /var/log/messages
 ```
 
-▪  開啟終端機，執行以下指令重新啟動rsyslog服務：
-#systemctl restart rsyslog.service
+## TWGCB-01-008-0189
+
+▪  開啟終端機，執行以下指令，檢查是否有未受限程序在執行：
+
+```shell
+ps -eZf | grep unconfined_service_t
+```
+
+▪  檢視上一步驟的輸出結果，若有未受限程序在執行，須執行chcon指令，將該程序設定至非「unconfined_service_t」之區域。以將「/usr/sbin/httpd」程序設定至「httpd_exec_t」區域為例，chcon指令範例如下：
+
+```shell
+chcon -t httpd_exec_t /usr/sbin/httpd
+```
+
+## TWGCB-01-008-0225
+
+1. 調查所有帳號
+
+執行下列
+
+```shell
+chage --mindays 1 (使用者帳號名稱)
+chage --warndays 14 (使用者帳號名稱)
+chage --maxdays 90 (使用者帳號名稱)
+chage --inactive 30 (使用者帳號名稱)
+```
+
+## TWGCB-01-008-0241
+
+/etc/profile.d/目錄下的「.sh」檔案及/etc/bashrc檔案，新增或修改參數如下：
+umask 027
+
+```shell
+ll /etc/profile.d/*.sh
+```

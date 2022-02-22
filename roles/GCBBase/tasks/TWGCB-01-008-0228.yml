@@ -1,0 +1,6 @@
+
+- name: TWGCB-01-008-0228
+  become: yes
+  command: useradd -D -f 30
+  ignore_errors: yes
+

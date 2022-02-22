@@ -1,0 +1,28 @@
+---
+
+- name: TWGCB-01-008-account /etc/login
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/login.defs
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-account /etc/profile
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/profile
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644
+
+- name: TWGCB-01-008-account /etc/bashrc
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/bashrc
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644

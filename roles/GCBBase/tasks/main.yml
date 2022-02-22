@@ -59,6 +59,7 @@
 # - include_tasks: TWGCB-01-008-0129.yml
 # - include_tasks: TWGCB-01-008-0136.yml
 # - include_tasks: TWGCB-01-008-0177.yml
+- include_tasks: TWGCB-01-008-0228.yml
 
 # - include_tasks: TWGCB-01-008-rules.yml
 # - include_tasks: TWGCB-01-008-service-disable.yml
@@ -68,7 +69,7 @@
 # - include_tasks: TWGCB-01-008-chmod-file-0640.yml
 # - include_tasks: TWGCB-01-008-chmod-file-0700.yml
 # - include_tasks: TWGCB-01-008-chmod-file-0740.yml
-- include_tasks: TWGCB-01-008-remove-package.yml
+# - include_tasks: TWGCB-01-008-remove-package.yml
 # - include_tasks: TWGCB-01-008-logs.yml
 # - include_tasks: TWGCB-01-008-auditd.yml
 # - include_tasks: TWGCB-01-008-etc-passwd.yml
@@ -77,4 +78,4 @@
 # - include_tasks: TWGCB-01-008-etc-selinux.yml
 # - include_tasks: TWGCB-01-008-sysctl.yml
 # - include_tasks: TWGCB-01-008-sudo.yml
-
+- include_tasks: TWGCB-01-008-account.yml
