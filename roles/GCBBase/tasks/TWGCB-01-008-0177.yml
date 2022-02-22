@@ -1,0 +1,13 @@
+# TWGCB-01-008-0177
+# ▪  這項原則決定是否設定rsyslog日誌記錄規則，以記錄認證、授權及系統服務等重要系統資訊
+# ▪  /etc/rsyslog.conf與/etc/rsyslog.d/*.conf檔案可設定日誌記錄規則，以及將指定之類別資訊儲存至日誌檔案
+# ▪  啟用rsyslog保存認證、授權及系統服務日誌，以供系統管理者監控是否有未經授權存取行為
+
+- name: TWGCB-01-008-0177 /etc/rsyslog.conf
+  become: yes
+  copy:
+    src: files/servers/{{server_name}}/etc/rsyslog.conf
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0644

@@ -19,3 +19,6 @@ service_enable:
     - 'auditd' # TWGCB-01-008-0133
     - 'rsyslog' # TWGCB-01-008-0175
     - 'crond' # TWGCB-01-008-0192
+
+service_restart:
+    - 'rsyslog' # TWGCB-01-008-0177

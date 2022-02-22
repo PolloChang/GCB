@@ -35,17 +35,9 @@
 #     state: latest
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
-# - include_tasks: TWGCB-01-008-sysctl.yml
-# - include_tasks: TWGCB-01-008-sudo.yml
-
 # - name: TWGCB-01-008-0037  
 #   include_tasks: TWGCB-01-008-0037.yml
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
-
-
-# - include_tasks: TWGCB-01-008-etc-passwd.yml
-# - include_tasks: TWGCB-01-008-etc-gshadow.yml
-# - include_tasks: TWGCB-01-008-etc-group.yml
 
 # - include_tasks: TWGCB-01-008-0047.yml
 # - include_tasks: TWGCB-01-008-0055.yml
@@ -58,27 +50,31 @@
 #   include_tasks: TWGCB-01-008-0093.yml
 #   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
-
 # - include_tasks: TWGCB-01-008-0098.yml
 # - include_tasks: TWGCB-01-008-0101.yml
 # - include_tasks: TWGCB-01-008-0102.yml
-
-# - include_tasks: TWGCB-01-008-remove-package.yml
-
 # - include_tasks: TWGCB-01-008-0126.yml
 # - include_tasks: TWGCB-01-008-0127.yml
 # - include_tasks: TWGCB-01-008-0128.yml
 # - include_tasks: TWGCB-01-008-0129.yml
-
 # - include_tasks: TWGCB-01-008-0136.yml
+# - include_tasks: TWGCB-01-008-0177.yml
 
 # - include_tasks: TWGCB-01-008-rules.yml
 # - include_tasks: TWGCB-01-008-service-disable.yml
 # - include_tasks: TWGCB-01-008-service-enable.yml
-
-# - include_tasks: TWGCB-01-008-chmod-file-0600.yml
+# - include_tasks: TWGCB-01-008-service-restart.yml
+- include_tasks: TWGCB-01-008-chmod-file-0600.yml
 # - include_tasks: TWGCB-01-008-chmod-file-0640.yml
-- include_tasks: TWGCB-01-008-chmod-file-0700.yml
-
+# - include_tasks: TWGCB-01-008-chmod-file-0700.yml
+- include_tasks: TWGCB-01-008-chmod-file-0740.yml
+# - include_tasks: TWGCB-01-008-remove-package.yml
 # - include_tasks: TWGCB-01-008-logs.yml
-- include_tasks: TWGCB-01-008-auditd.yml
+# - include_tasks: TWGCB-01-008-auditd.yml
+# - include_tasks: TWGCB-01-008-etc-passwd.yml
+# - include_tasks: TWGCB-01-008-etc-gshadow.yml
+# - include_tasks: TWGCB-01-008-etc-group.yml
+- include_tasks: TWGCB-01-008-etc-selinux.yml
+# - include_tasks: TWGCB-01-008-sysctl.yml
+# - include_tasks: TWGCB-01-008-sudo.yml
+

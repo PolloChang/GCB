@@ -20,3 +20,14 @@
   debug:
     msg: "File exists. Need people check TWGCB-01-008-sudo"
   when: file_status.stat.exists == True
+
+
+
+- name: TWGCB-01-008-0161 actions.rules
+  become: yes
+  copy:
+    src: files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/audit/rules.d/actions.rules
+    dest: /etc/audit/rules.d
+    owner: root
+    group: root
+    mode: 0644

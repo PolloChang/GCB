@@ -1,0 +1,12 @@
+
+
+- name: TWGCB-01-008-chmod-file-0740 in CentOS
+  ansible.builtin.file:
+    path: "{{item}}"
+    owner: root
+    group: root
+    mode: '0740'
+  with_items:
+    - '/var/log' # TWGCB-01-008-0179
+  when: ansible_distribution == "CentOS"
+  

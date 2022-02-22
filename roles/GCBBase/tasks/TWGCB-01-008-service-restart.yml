@@ -1,0 +1,29 @@
+# 啟動服務列表
+
+---
+- name: service-enable in CentOS 8
+  become: yes 
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+  ignore_errors: yes
+  loop: "{{ service_restart }}"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
+  
+- name: service-enable in CentOS 7
+  become: yes 
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+  ignore_errors: yes
+  loop: "{{ service_restart }}"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: service-enable in CentOS 6
+  become: yes 
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  ignore_errors: yes
+  loop: "{{ service_restart }}"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"

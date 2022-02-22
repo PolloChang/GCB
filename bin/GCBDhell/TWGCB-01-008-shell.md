@@ -99,3 +99,74 @@ chown root:root /etc/at.allow
 chmod 600 /etc/cron.allow
 chmod 600 /etc/at.allow
 ```
+
+## TWGCB-01-008-0143
+
+▪  開啟終端機，執行以下指令，檢查稽核工具權限：
+
+```shell
+stat -c "%a %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/audisp-remote /sbin/audisp-syslog /sbin/augenrules
+```
+
+▪  若有稽核工具權限高於750，則執行以下指令，設定稽核工具權限為750或更低權限：
+
+```shell
+chmod 750 (稽核工具名稱)
+```
+
+▪  若有稽核工具擁有者與群組非root，則執行以下指令，設定稽核工具擁有者與群組為root：
+
+```shell
+chown root:root (稽核工具名稱)
+```
+
+## TWGCB-01-008-0158
+
+▪  開啟終端機，執行以下指令，在系統上所有磁區(partition)，逐一檢查磁區所掛載之檔案目錄(如根目錄)中的特權程式，並為每個特權程序的執行，建立稽核規則：
+
+```shell
+find (partition) -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk '{print "-a always,exit -F path=" $1 " -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged" }'
+```
+
+▪  在/etc/audit/rules.d/目錄，新增或編輯「privileged.rules」檔案，將根磁區(root partition)的特權程式稽核規則加入到該檔案，指令範例如下：
+
+```shell
+find / -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk '{print "-a always,exit -F path=" $1 " -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged" }' >> /etc/audit/rules.d/privileged.rules
+```
+
+## TWGCB-01-008-0161
+
+▪  開啟終端機，執行指令如下，尋找sudo日誌檔案路徑
+
+```shell
+grep -r logfile /etc/sudoers* | sed -e 's/.*logfile=//;s/,? .*//'
+```
+
+寫入 ```files/{{ansible_distribution}}{{ansible_distribution_major_version}}/etc/audit/rules.d/actions.rules``` 文件中
+
+
+## TWGCB-01-008-0176
+
+```
+編輯/etc/rsyslog.conf檔案與 /etc/rsyslog.d/目錄下的「.conf」檔案，設定參數「$FileCreateMode」為0640或更低權限，範例如下：
+$FileCreateMode 0640
+```
+
+查調完請新增task
+
+## TWGCB-01-008-0177
+
+1. 調查
+
+* /etc/rsyslog.d/目錄下的「.conf」檔案
+* /etc/rsyslog.conf
+
+2. 新增或修改成以下內容：
+
+```
+auth.*,authpriv.* /var/log/secure
+daemon.* /var/log/messages
+```
+
+▪  開啟終端機，執行以下指令重新啟動rsyslog服務：
+#systemctl restart rsyslog.service

@@ -7,6 +7,7 @@
   with_items:
     - '/boot/grub2/grub.cfg' # TWGCB-01-008-0038
     - '/boot/grub2/grubenv' # TWGCB-01-008-0039
+    - ' /var/log/messages' # TWGCB-01-008-0178
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
   
 
