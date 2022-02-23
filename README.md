@@ -18,4 +18,8 @@ ansible-playbook --private-key /home/jameschang/Documents/gitContent/jameschang/
 ```
 ansible-playbook -i inventory playbookChangpwd.yml --extra-vars "newpassword=pwd username=username"
 ```
+#### CVE
 
+```shell
+ansible-playbook -i inventorys/inventory playbookCVE.yml -kK
+```
