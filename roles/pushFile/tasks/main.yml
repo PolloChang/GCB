@@ -1,8 +1,24 @@
+- name: Set vars
+  set_fact:
+    path: '/home/ansible/test'
+
+
+- name: Ansible check directory.
+  stat:
+    path: "{{ path }}"
+  register: checkFolder
+
+- name: Creates directory
+  file:
+    path: "{{ path }}"
+    state: directory
+  when: checkFolder.stat.exists == false
+
 - name: test push files
-  become: yes
   copy:
-    src: files/test.md
-    dest: /root
-    owner: root
-    group: root
+    # src: files/test.md
+    src: ./files/servers/test/test.txt
+    dest:  "{{ path }}"
+    owner: ansible
+    group: wheel
     mode: 0644
